@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test",
-    "slug": "test",
+    "name": "lost-and-found-pets",
+    "slug": "lost-and-found-pets",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

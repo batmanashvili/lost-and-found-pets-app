@@ -1,3 +1,18 @@
+
+
+
+/**
+ *
+ *
+ * @param id 
+ * @param title
+ * @param imageUri
+ * @param address
+ * @param lat
+ * @param lng
+ */
+
+ 
 class Place {
   constructor(id, title, imageUri, address, lat, lng) {
     this.id = id;

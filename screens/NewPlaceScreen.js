@@ -7,43 +7,56 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
 import ImgPicker from "../components/ImgPicker";
-import LocationPicker from '../components/LocationPicker';
-import * as placesActions from '../store/places-actions';
+import LocationPicker from "../components/LocationPicker";
+import * as placesActions from "../store/actions/places-actions";
 
 const NewPlaceScreen = (props) => {
   const dispatch = useDispatch();
-const { params } = useRoute();
+  const { params } = useRoute();
 
   const [titleValue, setTitleValue] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState({lat: 37, lng: 38});
+  const [selectedLocation, setSelectedLocation] = useState({
+    lat: 37,
+    lng: 38,
+  });
+  const [description, setDescription] = useState("");
 
-console.log(params, " params at NewPlacesScreen ")
-  
+  console.log(params, " params at NewPlacesScreen ");
 
   const titleChangeHandler = (text) => {
     // you could add validation
     setTitleValue(text);
   };
 
+  const descriptionChangeChangeHandler = (text) => {
+    setDescription(text);
+  };
+
   const imageTakenHandler = (imagePath) => {
     setSelectedImage(imagePath);
   };
 
-  const locationPickedHandler = useCallback(location => {
+  const locationPickedHandler = useCallback((location) => {
     setSelectedLocation(location);
   }, []);
 
   const savePlaceHandler = () => {
-    dispatch(placesActions.addPlace(titleValue, selectedImage, selectedLocation));
+    dispatch(
+      placesActions.addPlace(
+        titleValue,
+        selectedImage,
+        selectedLocation,
+        description
+      )
+    );
     props.navigation.goBack();
   };
-
 
   return (
     <ScrollView>
@@ -54,6 +67,13 @@ console.log(params, " params at NewPlacesScreen ")
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
+
+        <Text style={styles.label}>Description</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={descriptionChangeChangeHandler}
+          value={description}
+        />
         <ImgPicker onImageTaken={imageTakenHandler} />
         <LocationPicker
           // navigation={props.route}
@@ -61,7 +81,7 @@ console.log(params, " params at NewPlacesScreen ")
           mapPickedLocation={selectedLocation}
         />
         <Button
-          title='Save Place'
+          title="Save Place"
           color={Colors.primary}
           onPress={savePlaceHandler}
         />
@@ -71,8 +91,8 @@ console.log(params, " params at NewPlacesScreen ")
 };
 
 NewPlaceScreen.navigationOptions = {
-  headerTitle: 'Add Place'
-}
+  headerTitle: "Add Place",
+};
 
 const styles = StyleSheet.create({
   form: {

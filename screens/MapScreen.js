@@ -12,7 +12,6 @@ import Colors from '../constants/Colors';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
 const MapScreen = props => {
-
   const { navigate, setParams } = useNavigation();
   const { params } = useRoute()
 

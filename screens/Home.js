@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React , { useContext }from "react";
 import { View, Text, Alert, Button } from "react-native";
 import { useNavigation } from '@react-navigation/native'
